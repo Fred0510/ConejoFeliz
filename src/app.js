@@ -4,6 +4,7 @@
     Zanahoria: [ ],
     sprFondo:null,
     sprConejo:null,
+    size: null,
     random : function getRandom(min, max){
       return(Math.random() * (max - min + 1)) + min;  
     },
@@ -12,7 +13,7 @@
             cc.log("mover conejo");
             var juego = event.getCurrentTarget();
             var ubicacion = location.getLocation();
-            juego.sprConejo.setPosition(ubicacion.x,ubicacion.y);
+            juego.sprConejo.setPosition(ubicacion.x,juego.sprConejo.getPositionY());
             
             
         },
@@ -20,7 +21,7 @@
     creaZanahoria : function(){
         var carrot = new cc.Sprite(res.zanahoria_png);
        //carrot.setScale(0.4,0.4);
-        carrot.setPosition(this.random());
+        carrot.setPosition(this.random(this.size.width/2)-220, (this.size.width/2)+220, this.size.height+100);
         this.addChild(carrot, 1);
         this.Zanahoria.push(carrot);
         var moveto = cc.moveTo(3,carrot.getPositionX(), -50);
@@ -30,7 +31,7 @@
 		
 		var bomb = new cc.Sprite(res.bomba_png);
 		//bomb.setScale(0.4,0.4);
-        bomb.setPosition(this.random(this.size.width/2)-220,(this.size.width/2)+220);
+        bomb.setPosition(this.random(this.size.width/2)-220,(this.size.width/2)+220, this.size.height+100);
         this.addChild(bomb, 1);
 		var moveto = cc.moveTo(3,bomb.getPositionX(), -50);
         bomb.runAction(moveto);
@@ -40,6 +41,7 @@
         this._super();
         //Obteniendo el tamaño de la pantalla
         var size = cc.winSize;
+        this.size = size;
 
         //posicionando la imagen de fondo
         this.sprFondo = new cc.Sprite(res.fondo_png);
@@ -75,19 +77,22 @@
         
          cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
-             onTouchBegan : function(touch, event){
-                 
-               cc.log("touch done" + touch.getLocationX(this.MoverConejo));
-                 
-                 return true;
-             },
-             
-              onTouchMoved : function(touch,event){
-                  
-                  cc.log("touch began:" + touch.getLocationX(this.MoverConejo));
-              }   
+//             onTouchBegan : function(touch, event){
+//                 
+//               cc.log("touch done" + touch.getLocationX(this.MoverConejo));
+//                 
+//                 return true;
+//             },
+//             
+//              onTouchMoved : function(touch,event){
+//                  
+//                  cc.log("touch began:" + touch.getLocationX(this.MoverConejo));
+//              }
+             onTouchBegan: this.MoverConejo,
+             onTouchMoved: this.MoverConejo
         },this);
         
+             
 
         return true;
     }
