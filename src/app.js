@@ -1,5 +1,4 @@
-
-    var HelloWorldLayer = cc.Layer.extend({
+var HelloWorldLayer = cc.Layer.extend({
     Bomb: [ ],
     Zanahoria: [ ],
     sprFondo:null,
@@ -14,24 +13,23 @@
             var juego = event.getCurrentTarget();
             var ubicacion = location.getLocation();
             juego.sprConejo.setPosition(ubicacion.x,juego.sprConejo.getPositionY());
-            
-            
         },
     
     creaZanahoria : function(){
         var carrot = new cc.Sprite(res.zanahoria_png);
        //carrot.setScale(0.4,0.4);
-        carrot.setPosition(this.random(this.size.width/2)-220, (this.size.width/2)+220, this.size.height+100);
+        carrot.setPosition(this.random((this.size.width/2)-220, (this.size.width/2)+220), this.size.height+100);
         this.addChild(carrot, 1);
         this.Zanahoria.push(carrot);
         var moveto = cc.moveTo(3,carrot.getPositionX(), -50);
+        carrot.runAction(moveto);
         
     },
     creaBomba: function(){
 		
 		var bomb = new cc.Sprite(res.bomba_png);
 		//bomb.setScale(0.4,0.4);
-        bomb.setPosition(this.random(this.size.width/2)-220,(this.size.width/2)+220, this.size.height+100);
+        bomb.setPosition(this.random((this.size.width/2)-220,(this.size.width/2)+220), this.size.height+100);
         this.addChild(bomb, 1);
 		var moveto = cc.moveTo(3,bomb.getPositionX(), -50);
         bomb.runAction(moveto);
@@ -50,8 +48,8 @@
         
         //posicionando la imagen de fondo
         this.sprConejo = new cc.Sprite(res.conejo_png);
-        this.schedule(this.creaBomba,3);
-        this.schedule(this.creaZanahoria,3);
+        this.schedule(this.creaBomba,1);
+        this.schedule(this.creaZanahoria,1);
         this.sprConejo.setPosition(size.width / 2,size.height * 0.15);
         this.addChild(this.sprConejo, 1);
 
@@ -90,9 +88,7 @@
 //              }
              onTouchBegan: this.MoverConejo,
              onTouchMoved: this.MoverConejo
-        },this);
-        
-             
+        },this);     
 
         return true;
     }
