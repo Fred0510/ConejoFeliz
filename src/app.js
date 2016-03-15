@@ -26,17 +26,6 @@
         var moveto = cc.moveTo(3,carrot.getPositionX(), -50);
         
     },
-    
-//    creaBomba : function(){
-//        var bomb = new cc.Sprite(res.bomba_png);
-//         bomb.setPosition(this.random(1,480), this.size.height );
-//        bomb.setScale(0.4,0.4);
-//        var moveto = cc.moveTo(this.random(1,9), this.Bomb.getPositionX(), this.nave.getPositionY());
-//        this.addChild(bomb,1);
-//        this.Bomb.push(bomb);
-//        
-//    },
-    
     creaBomba: function(){
 		
 		var bomb = new cc.Sprite(res.bomba_png);
