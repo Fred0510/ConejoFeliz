@@ -19,20 +19,12 @@ var HelloWorldLayer = cc.Layer.extend({
     creaZanahoria : function(){
         var carrot = new cc.Sprite(res.zanahoria_png);
         carrot.setScale(0.4,0.4);
+        carrot.setPosition(this.random(1,480), this.size.height );    
         this.addChild(carrot, 1);
-        
+        this.carrot.push(carrot);
         
     },
     
-//    creaBomba : function(){
-//        var bomb = new cc.Sprite(res.bomba_png);
-//         bomb.setPosition(this.random(1,480), this.size.height );
-//        bomb.setScale(0.4,0.4);
-//        var moveto = cc.moveTo(this.random(1,9), this.Bomb.getPositionX(), this.nave.getPositionY());
-//        this.addChild(bomb,1);
-//        this.Bomb.push(bomb);
-//        
-//    },
     
     creaBomba: function(){
 		
@@ -83,8 +75,7 @@ var HelloWorldLayer = cc.Layer.extend({
         
          cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
-//             onTouchBegan : this.MoverConejo,
-              onTouchMove : this.MoverConejo
+              onTouchMoved : this.MoverConejo
             
         },this);
         
