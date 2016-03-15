@@ -75,8 +75,17 @@ var HelloWorldLayer = cc.Layer.extend({
         
          cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
-              onTouchMoved : this.MoverConejo
-            
+             onTouchBegan : function(touch, event){
+                 
+               cc.log("touch done" + touch.getLocationX(this.MoverConejo));
+                 
+                 return true;
+             },
+             
+              onTouchMoved : function(touch,event){
+                  
+                  cc.log("touch began:" + touch.getLocationX(this.MoverConejo));
+              }   
         },this);
         
 
